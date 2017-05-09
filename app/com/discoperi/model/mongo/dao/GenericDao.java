@@ -5,12 +5,16 @@ import java.util.List;
 /**
  * Created by Harmeet Singh(Taara) on 27/12/16.
  */
-public interface GenericDao<T> {
+public interface GenericDao<E> {
 
-    void save(T t);
+    void save(E entity);
 
-    T findById(int id);
+    E findById(String id);
 
-    List<T> findAll();
+    List<E> findAll();
+
+    void remove(E entity);
+
+    void remove(String id);
 
 }

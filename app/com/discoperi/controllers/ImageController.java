@@ -1,15 +1,20 @@
 package com.discoperi.controllers;
 
-import com.discoperi.model.mongo.entities.Employee;
-import com.discoperi.model.service.EmployeeService;
+
+import com.discoperi.model.mongo.entities.Image;
+import com.discoperi.model.service.ImageComputationService;
+import com.discoperi.model.service.ImageService;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import play.libs.Json;
 import play.mvc.Controller;
+import play.mvc.Http;
 import play.mvc.Result;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import java.util.concurrent.ExecutionException;
+
 
 /**
  * Created by Harmeet Singh(Taara) on 27/12/16.
@@ -17,28 +22,37 @@ import java.util.List;
 @Singleton
 public class ImageController extends Controller {
 
-  private EmployeeService employeeService;
+	private ImageService imageService;
 
-  @Inject
-  public ImageController( EmployeeService employeeService ){
-    this.employeeService = employeeService;
-  }
+	private ImageComputationService imageComputationService;
 
-
-  public Result index(){
-
-    List<Employee> list = new ArrayList<>(  );
-    for ( int i=0; i<10;i++ ){
-      Employee employee = new Employee();
-      employee.setName( "ME" + i );
-      employee.setAge( 22 + i);
-      employee.setSex( "MALE " + i );
-
-      employeeService.saveNewEmployee(  employee );
-      list.add( employee );
-    }
+	@Inject
+	public ImageController( ImageService imageService, ImageComputationService imageComputationService) {
+		this.imageService = imageService;
+		this.imageComputationService = imageComputationService;
+	}
 
 
-    return ok( Json.toJson( employeeService.findAllEmployees() ));
-  }
+	public Result uploadImage() throws InterruptedException, ExecutionException, IOException {
+		Http.MultipartFormData< File > body = request( ).body( ).asMultipartFormData( );
+		Http.MultipartFormData.FilePart< File > picture = body.getFile( "picture" );
+		if ( picture != null ) {
+			Image image =  imageComputationService.imageComputation( picture ).get();
+			imageService.saveImage( image );
+			return ok( Json.toJson( image ));
+		}
+		return ok( Json.toJson( "IMAGE" ));
+	}
+
+	public Result deleteImage (String objectId){
+		return ok();
+	}
+
+	public Result getImageSource(String objectId){
+		return ok();
+	}
+
+	public Result getImageSource(String objectId, String sourceType){
+		return ok();
+	}
 }

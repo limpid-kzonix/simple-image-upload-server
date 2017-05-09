@@ -4,30 +4,32 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.Lob;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 /**
- * Created by limpid on 4/28/17.
+ * Created by limpid on 5/1/17.
  */
-@Data
-@Embeddable
-@AllArgsConstructor
-@NoArgsConstructor
-public class Image {
 
-	@Column(name = "image_name")
-	private String imageName;
-	@Column(name = "width")
-	private String width;
-	@Column(name = "height")
-	private String height;
-	@Column(name = "type")
-	private String type;
-	@Column(name = "extension")
-	private String extension;
-	@Lob
-	private byte[] imageSource;
+@Entity
+@Data
+@Table( name = "images", schema = "play-db@mongoUnit" )
+@NoArgsConstructor
+@AllArgsConstructor
+public class Image implements Serializable {
+
+	@Id
+	@Column( name = "image_id" )
+	@GeneratedValue( strategy = GenerationType.AUTO )
+	private String imageId;
+
+	@Column( name = "name" )
+	private String name;
+
+	@OneToMany( fetch = FetchType.LAZY, cascade = CascadeType.ALL )
+	private List<ImageSource> imageSources;
+
+
 
 }

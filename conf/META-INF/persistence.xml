@@ -5,7 +5,8 @@
 
     <persistence-unit name="mongoUnit">
         <provider>com.impetus.kundera.KunderaPersistence</provider>
-        <class>com.discoperi.model.mongo.entities.Employee</class>
+        <class>com.discoperi.model.mongo.entities.Image</class>
+        <class>com.discoperi.model.mongo.entities.ImageSource</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="kundera.nodes" value="localhost"/>
