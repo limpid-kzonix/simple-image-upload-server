@@ -9,6 +9,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -22,7 +23,7 @@ public interface ImageComputationService {
 	CompletableFuture< Image > imageComputation( Http.MultipartFormData.FilePart< File > picture )
 			throws IOException, ExecutionException, InterruptedException;
 
-	CompletableFuture< File > fromImage( Image image );
+	CompletableFuture< Optional<File> > fromImage( Image image, String type );
 
 	CompletableFuture< File > fromImageSource( ImageSource imageSource, String type );
 

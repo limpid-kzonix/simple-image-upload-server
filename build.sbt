@@ -19,6 +19,8 @@ libraryDependencies ++= Seq(
   "org.projectlombok" % "lombok" % "1.16.16"
 )
 
+routesGenerator := InjectedRoutesGenerator
+
 fork in run := true
 
 javaOptions in Test += "-Dconfig.file=conf/application.test.conf"

@@ -14,9 +14,10 @@
             <property name="kundera.keyspace" value="play-db"/>
             <property name="kundera.dialect" value="mongodb"/>
             <property name="kundera.ddl.auto.prepare" value="update" />
+            <property name="kundera.batch.size" value="5000" />
             <property name="kundera.client.lookup.class" value="com.impetus.client.mongodb.MongoDBClientFactory"/>
             <property name="kundera.annotations.scan.package" value="com.base.models.kundera.entity"/>
-            <!--<property name="kundera.indexer.class" value="com.impetus.client.es.index.ESIndexer"/>-->
+
         </properties>
     </persistence-unit>
 

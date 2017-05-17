@@ -1,5 +1,6 @@
 package com.discoperi.model.mongo.dao.impl;
 
+
 import com.discoperi.model.KunderaEntityManageFactory;
 import com.discoperi.model.mongo.dao.GenericDao;
 
@@ -8,10 +9,12 @@ import javax.persistence.EntityManagerFactory;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
+
 /**
  * Created by Harmeet Singh(Taara) on 27/12/16.
  */
 public abstract class GenericDaoImpl< E > implements GenericDao< E > {
+
 
 	private Class< E > entityClass;
 
@@ -30,20 +33,32 @@ public abstract class GenericDaoImpl< E > implements GenericDao< E > {
 
 	@Override
 	public void save( E entity ) {
-		getEntityManager( ).persist( entity );
+		EntityManager e = getEntityManager( );
+		e.getTransaction( ).begin( );
+		e.persist( entity );
+		e.getTransaction( ).commit( );
 	}
 
 	@Override
 	public E findById( String id ) {
-		return getEntityManager( )
-				.createQuery( "SELECT entity FROM " + entityClass.getSimpleName( ) + " entity WHERE entity.id = :id", entityClass )
-				.setParameter( "id", id ).getSingleResult( );
+		EntityManager e = getEntityManager( );
+		e.getTransaction( ).begin( );
+		E result =
+				e.createQuery( "SELECT entity FROM " + entityClass.getSimpleName( ) + " entity WHERE entity.id = :id",
+				               entityClass )
+						.setParameter( "id", id ).getSingleResult( );
+		e.getTransaction( ).commit( );
+		return result;
 	}
 
 	@Override
 	public List< E > findAll( ) {
-		return getEntityManager( ).createQuery( "SELECT entity FROM " + entityClass.getSimpleName( ) + " entity", entityClass )
+		EntityManager e = getEntityManager( );
+		e.getTransaction( ).begin( );
+		List<E> results = e.createQuery( "SELECT entity FROM " + entityClass.getSimpleName( ) + " entity", entityClass )
 				.getResultList( );
+		e.getTransaction().commit();
+		return results;
 	}
 
 	@Override public void remove( E entity ) {

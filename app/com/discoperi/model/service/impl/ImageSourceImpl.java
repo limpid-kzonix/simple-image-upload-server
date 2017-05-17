@@ -4,6 +4,7 @@ package com.discoperi.model.service.impl;
 import com.discoperi.model.mongo.entities.ImageSource;
 import com.discoperi.model.service.ImageSourceService;
 import com.discoperi.model.service.utils.enumeration.ImageDimension;
+import com.discoperi.model.service.utils.enumeration.ImageExtension;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import play.libs.concurrent.HttpExecutionContext;
@@ -37,7 +38,7 @@ public class ImageSourceImpl implements ImageSourceService {
 			source.setType( dimension.getType( ) );
 			source.setWidth( dimension.getWidth( ) );
 			source.setHeight( dimension.getHeight( ) );
-			source.setExtension( ".jpeg" );
+			source.setExtension( ImageExtension.JPEG.getExtension() );
 			try {
 				source.setImageSource(
 						generateByteArray( resize( image, new Dimension( dimension.getWidth( ), dimension.getHeight( ) )
@@ -101,7 +102,7 @@ public class ImageSourceImpl implements ImageSourceService {
 			ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream( );
 
 			try {
-				ImageIO.write( image.get(), "jpg", byteArrayOutputStream );
+				ImageIO.write( image.get(), ImageExtension.JPEG.getName(), byteArrayOutputStream );
 			} catch ( IOException | InterruptedException | ExecutionException e ) {
 				e.printStackTrace( );
 			}

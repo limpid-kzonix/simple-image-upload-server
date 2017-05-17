@@ -1,5 +1,6 @@
 package com.discoperi.model;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import lombok.Getter;
 
@@ -15,7 +16,7 @@ public class KunderaEntityManageFactory {
 	@Getter
 	private static EntityManagerFactory managerFactory;
 
-
+	@Inject
 	public KunderaEntityManageFactory(){
 		managerFactory = Persistence.createEntityManagerFactory( "mongoUnit" );
 	}

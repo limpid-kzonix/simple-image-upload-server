@@ -1,8 +1,8 @@
 # Routes
 # This file defines all application routes (Higher priority routes first)
-GET         /api/v1/service/image/retrieve/        com.discoperi.controllers.ImageController.getImageSource(objectId : String)
-GET         /api/v1/service/image/retrieve/        com.discoperi.controllers.ImageController.getImageSource(objectId : String, sourceType : String )
-POST        /api/v1/service/image/upload/          com.discoperi.controllers.ImageController.uploadImage
+GET         /api/v1/service/image/retrieve/base/        @com.discoperi.controllers.ImageController.getImageSource(objectId : String, sourceType : String = "300x300")
+GET         /api/v1/service/image/retrieve/type/        @com.discoperi.controllers.ImageController.getImageSource(objectId : String, sourceType : String )
+POST        /api/v1/service/image/upload/               @com.discoperi.controllers.ImageController.uploadImage
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file                          controllers.Assets.versioned(path="/public", file: Asset)
+GET         /assets/*file                          @controllers.Assets.versioned(path="/public", file: Asset)

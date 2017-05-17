@@ -4,6 +4,7 @@ package com.discoperi.controllers;
 import com.discoperi.model.mongo.entities.Image;
 import com.discoperi.model.service.ImageComputationService;
 import com.discoperi.model.service.ImageService;
+import com.discoperi.module.error.custom.UnifiedError;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import play.libs.Json;
@@ -13,6 +14,7 @@ import play.mvc.Result;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 
@@ -48,11 +50,17 @@ public class ImageController extends Controller {
 		return ok();
 	}
 
-	public Result getImageSource(String objectId){
-		return ok();
-	}
-
-	public Result getImageSource(String objectId, String sourceType){
-		return ok();
+	public Result getImageSource(String objectId, String sourceType) throws ExecutionException, InterruptedException {
+		Image image = imageService.findImageById( objectId );
+		Optional<File> file = imageComputationService.fromImage( image, sourceType ).get( );
+		File source = file.orElseGet( () -> {
+			try {
+				throw new UnifiedError(  );
+			} catch ( UnifiedError unifiedError ) {
+				unifiedError.printStackTrace( );
+			}
+			return null;
+		}  );
+		return ok( source );
 	}
 }

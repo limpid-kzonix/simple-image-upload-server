@@ -16,13 +16,13 @@ import java.io.Serializable;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table( name = "sources", schema = "play-db@mongoUnit" )
+@Table( name = "images.sources", schema = "play-db@mongoUnit" )
 public class ImageSource implements Serializable {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.AUTO )
 	@Column( name = "source_id" )
-	private String imageId;
+	private String id;
 
 
 	@Column( name = "width" )
@@ -42,7 +42,7 @@ public class ImageSource implements Serializable {
 	private byte[] imageSource;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "parent_id")
+	@JoinColumn(name = "image_id")
 	private Image image;
 
 }

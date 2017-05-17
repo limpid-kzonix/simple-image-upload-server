@@ -1,6 +1,7 @@
 package com.discoperi.model.service;
 
 import com.discoperi.model.mongo.entities.Image;
+import com.discoperi.module.error.custom.UnifiedError;
 
 import java.io.File;
 import java.util.concurrent.ExecutionException;
@@ -18,7 +19,8 @@ public interface ImageService {
 
 	void delete(Image image);
 
-	File getTypedImageAsFile( String objectId, String type ) throws ExecutionException, InterruptedException;
+	File getTypedImageAsFile( String objectId, String type )
+			throws ExecutionException, InterruptedException, UnifiedError;
 
 	File getOriginalImageAsFile( String objectId );
 }
