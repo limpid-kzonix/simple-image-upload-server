@@ -4,9 +4,11 @@ name := """KunderaDataBaseCloud"""
 
 version := "1.0-SNAPSHOT"
 
-lazy val root = (project in file(".")).enablePlugins(PlayJava, DockerPlugin)
+lazy val root = (project in file(".")).enablePlugins(PlayJava, PlayNettyServer, PlayEnhancer)
 
 scalaVersion := "2.11.8"
+
+resolvers += Resolver.url("Typesafe Ivy releases", url("https://repo.typesafe.com/typesafe/ivy-releases"))(Resolver.ivyStylePatterns)
 
 libraryDependencies ++= Seq(
 
