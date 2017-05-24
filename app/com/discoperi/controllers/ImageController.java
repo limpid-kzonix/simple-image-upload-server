@@ -53,7 +53,7 @@ public class ImageController extends Controller {
 
 	public Result deleteImage( String objectId ) {
 		imageService.delete( objectId );
-		return ok( Json.toJson( UnifiedMessage.response( "DELETE: " + objectId ) ) );
+		return ok( Json.toJson( UnifiedMessage.response( "Image with ID["+ objectId +"] deleted." ) ) );
 	}
 
 	public Result getImageSource( String objectId, String sourceType ) throws ExecutionException, InterruptedException {

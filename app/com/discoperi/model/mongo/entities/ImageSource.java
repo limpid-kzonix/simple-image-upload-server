@@ -1,5 +1,6 @@
 package com.discoperi.model.mongo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -41,6 +42,7 @@ public class ImageSource implements Serializable {
 	@Column( name = "source" )
 	private byte[] imageSource;
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "image_id")
 	private Image image;

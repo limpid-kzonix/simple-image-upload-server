@@ -4,7 +4,7 @@ name := """KunderaDataBaseCloud"""
 
 version := "1.0-SNAPSHOT"
 
-lazy val root = (project in file(".")).enablePlugins(PlayJava, DebianPlugin)
+lazy val root = (project in file(".")).enablePlugins(PlayJava, DockerPlugin)
 
 scalaVersion := "2.11.8"
 

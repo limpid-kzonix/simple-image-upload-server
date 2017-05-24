@@ -73,8 +73,9 @@ public abstract class GenericDaoImpl< E > implements GenericDao< E > {
 	@Override public void remove( String id ) {
 		EntityManager e = getEntityManager( );
 		e.getTransaction( ).begin( );
-		e.createQuery( "DELETE entity FROM " + entityClass.getSimpleName( ) + " entity WHERE entity.id = :id",
-		               entityClass ).executeUpdate( );
+		e.createQuery( "DELETE FROM " + entityClass.getSimpleName( ) + " entity WHERE entity.id = :id",
+		               entityClass )
+				.setParameter( "id", id ).executeUpdate( );
 		e.getTransaction( ).commit( );
 
 
