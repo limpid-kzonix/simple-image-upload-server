@@ -9,7 +9,7 @@ lazy val root = (project in file(".")).enablePlugins(PlayJava, PlayNettyServer, 
 scalaVersion := "2.11.8"
 
 resolvers += Resolver.url("Typesafe Ivy releases", url("https://repo.typesafe.com/typesafe/ivy-releases"))(Resolver.ivyStylePatterns)
-
+resolvers += "typesave" at "http://repo.typesafe.com/typesafe/releases"
 libraryDependencies ++= Seq(
 
   javaCore,
@@ -20,6 +20,7 @@ libraryDependencies ++= Seq(
   "com.fasterxml.jackson.core" % "jackson-annotations" % "2.8.8",
   "org.projectlombok" % "lombok" % "1.16.16"
 )
+
 
 routesGenerator := InjectedRoutesGenerator
 
