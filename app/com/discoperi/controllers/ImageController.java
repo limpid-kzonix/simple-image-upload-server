@@ -4,6 +4,7 @@ package com.discoperi.controllers;
 import com.discoperi.model.mongo.entities.Image;
 import com.discoperi.model.service.ImageComputationService;
 import com.discoperi.model.service.ImageService;
+import com.discoperi.module.UnifiedMessage;
 import com.discoperi.module.error.custom.UnifiedError;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -24,43 +25,48 @@ import java.util.concurrent.ExecutionException;
 @Singleton
 public class ImageController extends Controller {
 
+
 	private ImageService imageService;
 
 	private ImageComputationService imageComputationService;
 
 	@Inject
-	public ImageController( ImageService imageService, ImageComputationService imageComputationService) {
+	public ImageController( ImageService imageService, ImageComputationService imageComputationService ) {
 		this.imageService = imageService;
 		this.imageComputationService = imageComputationService;
 	}
 
 
-	public Result uploadImage() throws InterruptedException, ExecutionException, IOException {
+	public Result uploadImage( ) throws InterruptedException, ExecutionException, IOException {
 		Http.MultipartFormData< File > body = request( ).body( ).asMultipartFormData( );
 		Http.MultipartFormData.FilePart< File > picture = body.getFile( "picture" );
 		if ( picture != null ) {
-			Image image =  imageComputationService.imageComputation( picture ).get();
+			Image image = imageComputationService.imageComputation( picture ).get( );
 			imageService.saveImage( image );
-			return ok( Json.toJson( image ));
+			return ok( Json.toJson( UnifiedMessage.response( image.getId( ) ) ) );
 		}
-		return ok( Json.toJson( "IMAGE" ));
+		return ok( Json.toJson(
+				UnifiedMessage.error( "ERROR", 400, "Invalid type of input param [multipart/data]" )
+		                      )
+		         );
 	}
 
-	public Result deleteImage (String objectId){
-		return ok();
+	public Result deleteImage( String objectId ) {
+		imageService.delete( objectId );
+		return ok( Json.toJson( UnifiedMessage.response( "DELETE: " + objectId ) ) );
 	}
 
-	public Result getImageSource(String objectId, String sourceType) throws ExecutionException, InterruptedException {
+	public Result getImageSource( String objectId, String sourceType ) throws ExecutionException, InterruptedException {
 		Image image = imageService.findImageById( objectId );
-		Optional<File> file = imageComputationService.fromImage( image, sourceType ).get( );
-		File source = file.orElseGet( () -> {
+		Optional< File > file = imageComputationService.fromImage( image, sourceType ).get( );
+		File source = file.orElseGet( ( ) -> {
 			try {
-				throw new UnifiedError(  );
+				throw new UnifiedError( );
 			} catch ( UnifiedError unifiedError ) {
 				unifiedError.printStackTrace( );
 			}
 			return null;
-		}  );
+		} );
 		return ok( source );
 	}
 }

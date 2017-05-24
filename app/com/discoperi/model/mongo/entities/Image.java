@@ -1,5 +1,6 @@
 package com.discoperi.model.mongo.entities;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+
 
 /**
  * Created by limpid on 5/1/17.
@@ -19,6 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Image implements Serializable {
 
+
 	@Id
 	@Column( name = "image_id" )
 	@GeneratedValue( strategy = GenerationType.AUTO )
@@ -27,9 +30,11 @@ public class Image implements Serializable {
 	@Column( name = "name" )
 	private String name;
 
-	@OneToMany( fetch = FetchType.LAZY, cascade = CascadeType.ALL )
-	private List<ImageSource> imageSources;
+	@Column( name = "slug" )
+	private String slug;
 
+	@OneToMany( fetch = FetchType.LAZY, cascade = CascadeType.ALL )
+	private List< ImageSource > imageSources;
 
 
 }

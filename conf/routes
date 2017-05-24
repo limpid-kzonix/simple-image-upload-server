@@ -3,6 +3,7 @@
 GET         /api/v1/service/image/retrieve/base/        @com.discoperi.controllers.ImageController.getImageSource(objectId : String, sourceType : String = "300x300")
 GET         /api/v1/service/image/retrieve/type/        @com.discoperi.controllers.ImageController.getImageSource(objectId : String, sourceType : String )
 POST        /api/v1/service/image/upload/               @com.discoperi.controllers.ImageController.uploadImage
+DELETE      /api/v1/service/image/delete/               @com.discoperi.controllers.ImageController.deleteImage(objectId : String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file                          @controllers.Assets.versioned(path="/public", file: Asset)

@@ -55,17 +55,28 @@ public abstract class GenericDaoImpl< E > implements GenericDao< E > {
 	public List< E > findAll( ) {
 		EntityManager e = getEntityManager( );
 		e.getTransaction( ).begin( );
-		List<E> results = e.createQuery( "SELECT entity FROM " + entityClass.getSimpleName( ) + " entity", entityClass )
-				.getResultList( );
-		e.getTransaction().commit();
+		List< E > results =
+				e.createQuery( "SELECT entity FROM " + entityClass.getSimpleName( ) + " entity", entityClass )
+						.getResultList( );
+		e.getTransaction( ).commit( );
 		return results;
 	}
 
 	@Override public void remove( E entity ) {
+		EntityManager e = getEntityManager( );
+		e.getTransaction( ).begin( );
+		e.remove( entity );
+		e.getTransaction( ).commit( );
 
 	}
 
 	@Override public void remove( String id ) {
+		EntityManager e = getEntityManager( );
+		e.getTransaction( ).begin( );
+		e.createQuery( "DELETE entity FROM " + entityClass.getSimpleName( ) + " entity WHERE entity.id = :id",
+		               entityClass ).executeUpdate( );
+		e.getTransaction( ).commit( );
+
 
 	}
 
