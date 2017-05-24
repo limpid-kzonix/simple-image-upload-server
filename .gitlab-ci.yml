@@ -1,10 +1,10 @@
-image: java
+image: java:8
 before_script:
   - apt-get update -y
   - apt-get install apt-transport-https -y
 
   # Install NodeJs
-  - curl -sL https://deb.nodesource.com/setup | sudo bash -
+  - curl -sL https://deb.nodesource.com/setup | bash -
   - apt-get install -y nodejs
   # Install SBT
   - echo "deb http://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.list.d/sbt.list
