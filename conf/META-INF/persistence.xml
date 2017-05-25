@@ -9,7 +9,7 @@
         <class>com.discoperi.model.mongo.entities.ImageSource</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
-            <property name="kundera.nodes" value="localhost"/>
+            <property name="kundera.nodes" value="212.111.198.50"/>
             <property name="kundera.port" value="27017"/>
             <property name="kundera.keyspace" value="play-db"/>
             <property name="kundera.dialect" value="mongodb"/>

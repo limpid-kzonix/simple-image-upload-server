@@ -11,7 +11,7 @@ scalaVersion := "2.11.8"
 resolvers += Resolver.url("Typesafe Ivy releases", url("https://repo.typesafe.com/typesafe/ivy-releases"))(Resolver.ivyStylePatterns)
 
 libraryDependencies ++= Seq(
-
+  cache,
   javaCore,
   "com.impetus.kundera.client" % "kundera-mongo" % "3.8",
   "com.google.code.gson" % "gson" % "2.8.0",
