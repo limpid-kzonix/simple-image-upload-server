@@ -23,4 +23,4 @@ deploy_job:
   - "sbt stage"
   - "sbt dist"
   - "ls -la"
-  - "./prod.sh"
+  - "sh prod.sh"
