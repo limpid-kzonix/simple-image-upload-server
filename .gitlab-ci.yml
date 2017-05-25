@@ -15,13 +15,7 @@ before_script:
 
 
 stages:
-- build
 - deploy
-
-build_job:
-  stage: build
-  script:
-  - "sbt clean"
 
 deploy_job:
   stage: deploy
