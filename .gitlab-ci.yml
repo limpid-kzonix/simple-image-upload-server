@@ -26,4 +26,4 @@ build_job:
 deploy_job:
   stage: deploy
   script:
-  - sbt run
+  - sh stage.sh
