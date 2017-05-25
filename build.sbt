@@ -23,7 +23,3 @@ libraryDependencies ++= Seq(
 
 
 routesGenerator := InjectedRoutesGenerator
-
-fork in run := true
-
-javaOptions in Test += "-Dconfig.file=conf/application.test.conf"

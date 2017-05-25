@@ -26,4 +26,6 @@ build_job:
 deploy_job:
   stage: deploy
   script:
+  - "ls -la"
+  - "echo $HOME "
   - "sh stage.sh"
