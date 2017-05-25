@@ -21,7 +21,7 @@ stages:
 build_job:
   stage: build
   script:
-  - "sbt clean playGenerateSecret"
+  - "sbt clean"
 
 deploy_job:
   stage: deploy
