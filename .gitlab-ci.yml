@@ -22,5 +22,4 @@ deploy_job:
   script:
   - "sbt stage"
   - "sbt dist"
-  - "ls -la"
-  - "sh prod.sh"
+
