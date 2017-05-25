@@ -4,7 +4,7 @@ before_script:
   - apt-get install apt-transport-https -y
 
   # Install NodeJs
-  - curl -sL https://deb.nodesource.com/setup | bash -
+  - curl -sL https://deb.nodesource.com/setup_6.x | bash -
   - apt-get install -y nodejs
   # Install SBT
   - echo "deb http://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.list.d/sbt.list
@@ -26,4 +26,4 @@ build_job:
 deploy_job:
   stage: deploy
   script:
-  - sh stage.sh
+  - sbt
