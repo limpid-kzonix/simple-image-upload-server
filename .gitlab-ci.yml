@@ -21,9 +21,12 @@ stages:
 build_job:
   stage: build
   script:
-  - "sbt clean playGenerateSecret  stage"
+  - "sbt clean playGenerateSecret"
 
 deploy_job:
   stage: deploy
   script:
+  - "sbt stage"
+  - "sbt dist"
   - "ls -la"
+  - "./prod.sh"
