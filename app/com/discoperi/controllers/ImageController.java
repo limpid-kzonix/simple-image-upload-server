@@ -5,9 +5,9 @@ import com.discoperi.model.mongo.entities.Image;
 import com.discoperi.model.service.ImageComputationService;
 import com.discoperi.model.service.ImageService;
 import com.discoperi.module.UnifiedMessage;
-import com.discoperi.module.error.custom.UnifiedError;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import play.cache.CacheApi;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Http;
@@ -30,10 +30,15 @@ public class ImageController extends Controller {
 
 	private ImageComputationService imageComputationService;
 
+	private CacheApi cacheApi;
+
 	@Inject
-	public ImageController( ImageService imageService, ImageComputationService imageComputationService ) {
+	public ImageController( ImageService imageService,
+	                        ImageComputationService imageComputationService,
+	                        CacheApi cacheApi ) {
 		this.imageService = imageService;
 		this.imageComputationService = imageComputationService;
+		this.cacheApi = cacheApi;
 	}
 
 
@@ -53,20 +58,22 @@ public class ImageController extends Controller {
 
 	public Result deleteImage( String objectId ) {
 		imageService.delete( objectId );
-		return ok( Json.toJson( UnifiedMessage.response( "Image with ID["+ objectId +"] deleted." ) ) );
+		return ok( Json.toJson( UnifiedMessage.response( "Image with ID[" + objectId + "] deleted." ) ) );
 	}
 
 	public Result getImageSource( String objectId, String sourceType ) throws ExecutionException, InterruptedException {
+
+		String cacheKey = String.format( "key.%s-%s", objectId, sourceType );
 		Image image = imageService.findImageById( objectId );
-		Optional< File > file = imageComputationService.fromImage( image, sourceType ).get( );
-		File source = file.orElseGet( ( ) -> {
-			try {
-				throw new UnifiedError( );
-			} catch ( UnifiedError unifiedError ) {
-				unifiedError.printStackTrace( );
-			}
-			return null;
+		File outSource = cacheApi.getOrElse( cacheKey, ( ) -> {
+			Optional< File > file = imageComputationService.fromImage( image, sourceType ).get( );
+			File source = file.orElseGet( ( ) -> {
+				return null;
+			} );
+			cacheApi.set( cacheKey, source, 60 * 20 );
+			return source;
 		} );
-		return ok( source );
+
+		return ok( outSource );
 	}
 }
