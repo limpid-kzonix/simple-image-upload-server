@@ -38,7 +38,7 @@ public class ImageSourceImpl implements ImageSourceService {
 			source.setType( dimension.getType( ) );
 			source.setWidth( dimension.getWidth( ) );
 			source.setHeight( dimension.getHeight( ) );
-			source.setExtension( ImageExtension.JPEG.getExtension() );
+			source.setExtension( ImageExtension.PNG.getExtension() );
 			try {
 				source.setImageSource(
 						generateByteArray( resize( image, new Dimension( dimension.getWidth( ), dimension.getHeight( ) )

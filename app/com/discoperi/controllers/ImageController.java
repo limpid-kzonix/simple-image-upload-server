@@ -7,6 +7,7 @@ import com.discoperi.model.service.ImageService;
 import com.discoperi.module.UnifiedMessage;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import play.Logger;
 import play.cache.CacheApi;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -71,6 +72,7 @@ public class ImageController extends Controller {
 				return null;
 			} );
 			cacheApi.set( cacheKey, source, 60 * 20 );
+			Logger.info( "Image with key [CACHE-KEY]{}",cacheKey );
 			return source;
 		} );
 

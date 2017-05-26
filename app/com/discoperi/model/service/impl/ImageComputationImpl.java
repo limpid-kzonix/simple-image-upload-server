@@ -5,6 +5,7 @@ import com.discoperi.model.mongo.entities.Image;
 import com.discoperi.model.mongo.entities.ImageSource;
 import com.discoperi.model.service.ImageComputationService;
 import com.discoperi.model.service.ImageSourceService;
+import com.discoperi.model.service.utils.enumeration.ImageExtension;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import play.Logger;
@@ -77,11 +78,11 @@ public class ImageComputationImpl implements ImageComputationService {
 		}, executionContext.current() ).thenApply( bytes -> {
 			File file = null;
 			try {
-				file = File.createTempFile( UUID.randomUUID().toString(),".jpeg"  );
+				file = File.createTempFile( UUID.randomUUID().toString(),"." + ImageExtension.PNG.getExtension() );
 				InputStream in = new ByteArrayInputStream( bytes );
 				BufferedImage imageFromSource = ImageIO.read( in );
 
-				ImageIO.write( imageFromSource, "jpeg", file );
+				ImageIO.write( imageFromSource, ImageExtension.PNG.getExtension(), file );
 				return  Optional.of(file);
 			} catch ( IOException ignored ) {
 				ignored.printStackTrace( );
