@@ -1,4 +1,4 @@
-package com.discoperi.module.error.custom;
+package com.discoperi.module.utils.http.error.custom;
 
 
 /**

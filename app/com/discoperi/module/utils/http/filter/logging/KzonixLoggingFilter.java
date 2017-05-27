@@ -1,4 +1,4 @@
-package com.discoperi.module.filter.logging;
+package com.discoperi.module.utils.http.filter.logging;
 
 
 import akka.util.ByteString;

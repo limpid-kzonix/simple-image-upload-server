@@ -1,7 +1,7 @@
 package com.discoperi.model.service;
 
 import com.discoperi.model.mongo.entities.Image;
-import com.discoperi.module.error.custom.UnifiedError;
+import com.discoperi.module.utils.http.error.custom.UnifiedError;
 
 import java.io.File;
 import java.util.concurrent.ExecutionException;

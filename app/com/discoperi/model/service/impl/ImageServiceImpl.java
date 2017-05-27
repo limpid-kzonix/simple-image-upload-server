@@ -4,7 +4,7 @@ import com.discoperi.model.mongo.dao.ImageDao;
 import com.discoperi.model.mongo.entities.Image;
 import com.discoperi.model.service.ImageComputationService;
 import com.discoperi.model.service.ImageService;
-import com.discoperi.module.error.custom.UnifiedError;
+import com.discoperi.module.utils.http.error.custom.UnifiedError;
 import com.google.inject.Inject;
 
 import javax.inject.Singleton;

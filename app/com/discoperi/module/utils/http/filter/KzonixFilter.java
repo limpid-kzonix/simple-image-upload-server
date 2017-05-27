@@ -1,7 +1,7 @@
-package com.discoperi.module.filter;
+package com.discoperi.module.utils.http.filter;
 
 
-import com.discoperi.module.filter.logging.KzonixLoggingFilter;
+import com.discoperi.module.utils.http.filter.logging.KzonixLoggingFilter;
 import com.google.inject.Inject;
 import play.filters.gzip.GzipFilter;
 import play.http.DefaultHttpFilters;

@@ -1,4 +1,4 @@
-package com.discoperi.module;
+package com.discoperi.module.utils.http;
 
 
 import lombok.AllArgsConstructor;
