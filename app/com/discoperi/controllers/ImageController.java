@@ -5,6 +5,7 @@ import com.discoperi.model.mongo.entities.Image;
 import com.discoperi.model.service.ImageComputationService;
 import com.discoperi.model.service.ImageService;
 import com.discoperi.module.UnifiedMessage;
+import com.discoperi.module.error.custom.UnifiedError;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import play.Logger;
@@ -67,12 +68,10 @@ public class ImageController extends Controller {
 		String cacheKey = String.format( "key.%s-%s", objectId, sourceType );
 		Image image = imageService.findImageById( objectId );
 		File outSource = cacheApi.getOrElse( cacheKey, ( ) -> {
-			Optional< File > file = imageComputationService.fromImage( image, sourceType ).get( );
-			File source = file.orElseGet( ( ) -> {
-				return null;
-			} );
+			Optional<File> file = imageComputationService.fromImage( image, sourceType ).get( );
+			File source = file.orElseThrow(UnifiedError::new);
 			cacheApi.set( cacheKey, source, 60 * 20 );
-			Logger.info( "Image with key [CACHE-KEY]{}",cacheKey );
+			Logger.info( "Image with key [CACHE-KEY]{}", cacheKey );
 			return source;
 		} );
 

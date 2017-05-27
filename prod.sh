@@ -7,4 +7,4 @@ sbt stage
 echo 'Build distributive'
 sbt dist
 echo 'PRODUCTION'
-sudo target/universal/stage/bin/./kunderadatabasecloud -J-Xms1280M -J-Xmx2120m -J-server -Dconfig.file=target/universal/stage/conf/application.conf -Dpidfile.path=/var/run/play.pid -Dhttp.port=9220
+target/universal/stage/bin/./kunderadatabasecloud -J-Xms1280M -J-Xmx2120m -J-server -Dconfig.file=target/universal/stage/conf/application.conf  -Dhttp.port=9220

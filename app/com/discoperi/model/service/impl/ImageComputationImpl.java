@@ -61,7 +61,7 @@ public class ImageComputationImpl implements ImageComputationService {
 		}, executionContext.current( ) );
 	}
 
-	@Override public CompletableFuture< Optional<File> > fromImage( Image image, String type ) {
+	@Override public CompletableFuture< Optional< File> > fromImage( Image image, String type ) {
 		return CompletableFuture.supplyAsync( () -> {
 			List<ImageSource> sources =  image.getImageSources();
 			for ( ImageSource source : sources ) {
@@ -78,16 +78,16 @@ public class ImageComputationImpl implements ImageComputationService {
 		}, executionContext.current() ).thenApply( bytes -> {
 			File file = null;
 			try {
-				file = File.createTempFile( UUID.randomUUID().toString(),"." + ImageExtension.PNG.getExtension() );
+				file = File.createTempFile( UUID.randomUUID().toString(), ImageExtension.PNG.getExtension() );
 				InputStream in = new ByteArrayInputStream( bytes );
 				BufferedImage imageFromSource = ImageIO.read( in );
 
-				ImageIO.write( imageFromSource, ImageExtension.PNG.getExtension(), file );
-				return  Optional.of(file);
+				ImageIO.write( imageFromSource, ImageExtension.PNG.getName(), file );
+				return  Optional.of( file );
 			} catch ( IOException ignored ) {
 				ignored.printStackTrace( );
 			}
-			return Optional.empty( );
+			return Optional.empty();
 		} );
 	}
 

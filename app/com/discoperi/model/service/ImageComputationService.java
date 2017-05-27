@@ -23,7 +23,7 @@ public interface ImageComputationService {
 	CompletableFuture< Image > imageComputation( Http.MultipartFormData.FilePart< File > picture )
 			throws IOException, ExecutionException, InterruptedException;
 
-	CompletableFuture< Optional<File> > fromImage( Image image, String type );
+	CompletableFuture< Optional< File > > fromImage( Image image, String type );
 
 	CompletableFuture< File > fromImageSource( ImageSource imageSource, String type );
 
