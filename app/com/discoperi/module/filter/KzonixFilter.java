@@ -1,6 +1,7 @@
-package com.discoperi.module.filter.logging;
+package com.discoperi.module.filter;
 
 
+import com.discoperi.module.filter.logging.KzonixLoggingFilter;
 import com.google.inject.Inject;
 import play.filters.gzip.GzipFilter;
 import play.http.DefaultHttpFilters;
@@ -15,9 +16,11 @@ public class KzonixFilter extends DefaultHttpFilters {
 	private EssentialFilter[] filters;
 
 	@Inject
-	public KzonixFilter( GzipFilter gzipFilter ) {
+	public KzonixFilter( GzipFilter gzipFilter,
+	                     KzonixLoggingFilter loggingFilter ) {
 		filters = new EssentialFilter[]{
-				gzipFilter.asJava()
+				gzipFilter.asJava(),
+		        loggingFilter.asJava()
 		};
 	}
 
