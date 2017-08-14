@@ -1,3 +1,5 @@
+# Deprecate: wanna to rewrite on MongoAsyncDriver (GridFs) and extend and separate (Image: with current logic, Video: with color processing frame-by-frame, gify-maker, pdf/djvu - two-way converting).  
+
 # This is Play application with Java, JPA wrapper - Kundera (like Hibernate)
 
 # File storage :
