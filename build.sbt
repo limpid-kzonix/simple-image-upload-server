@@ -14,7 +14,7 @@ libraryDependencies ++= Seq(
   cache,
   javaCore,
   filters,
-  "com.impetus.kundera.client" % "kundera-mongo" % "3.8",
+  "com.impetus.kundera.client" % "kundera-mongo" % "3.13",
   "com.google.code.gson" % "gson" % "2.8.6",
   "com.fasterxml.jackson.core" % "jackson-core" % "2.11.3",
   "com.fasterxml.jackson.core" % "jackson-databind" % "2.11.3",
