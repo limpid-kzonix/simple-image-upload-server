@@ -19,7 +19,7 @@ libraryDependencies ++= Seq(
   "com.fasterxml.jackson.core" % "jackson-core" % "2.12.1",
   "com.fasterxml.jackson.core" % "jackson-databind" % "2.12.1",
   "com.fasterxml.jackson.core" % "jackson-annotations" % "2.12.1",
-  "org.projectlombok" % "lombok" % "1.18.16"
+  "org.projectlombok" % "lombok" % "1.18.18"
 )
 
 
