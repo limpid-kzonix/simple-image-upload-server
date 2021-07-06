@@ -18,7 +18,7 @@ libraryDependencies ++= Seq(
   "com.google.code.gson" % "gson" % "2.8.7",
   "com.fasterxml.jackson.core" % "jackson-core" % "2.12.3",
   "com.fasterxml.jackson.core" % "jackson-databind" % "2.12.3",
-  "com.fasterxml.jackson.core" % "jackson-annotations" % "2.12.3",
+  "com.fasterxml.jackson.core" % "jackson-annotations" % "2.12.4",
   "org.projectlombok" % "lombok" % "1.18.20"
 )
 
